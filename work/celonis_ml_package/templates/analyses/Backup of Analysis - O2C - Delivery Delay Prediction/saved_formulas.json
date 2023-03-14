@@ -1,0 +1,130 @@
+[
+  {
+    "description": "",
+    "id": "003355f3-d027-4d22-a744-95468c9a902f",
+    "name": "Precision",
+    "parameterCount": 0,
+    "parameters": [],
+    "template": "\nKPI(\"TP\") / (KPI(\"TP\") + KPI(\"FP\"))"
+  },
+  {
+    "description": "",
+    "id": "7a718773-fa41-40a3-9715-691b68987c87",
+    "name": "F1",
+    "parameterCount": 0,
+    "parameters": [],
+    "template": "2.0 * (KPI(\"Precision\") * KPI(\"Recall\")) / (KPI(\"Precision\") + KPI(\"Recall\"))"
+  },
+  {
+    "description": "",
+    "id": "66fa7545-7296-42d6-8baa-e7f0f8e983de",
+    "name": "FDR",
+    "parameterCount": 0,
+    "parameters": [],
+    "template": "KPI(\"FP\") / (KPI(\"TP\") + KPI(\"FP\"))"
+  },
+  {
+    "description": "",
+    "id": "874b0a80-edb5-4fbb-86b7-49b3a53772e0",
+    "name": "today_help",
+    "parameterCount": 0,
+    "parameters": [],
+    "template": "YEAR(ADD_DAYS(MAX(PU_LAST(VBAP,\"_CEL_O2C_ACTIVITIES\".\"EVENTTIME\",\"_CEL_O2C_ACTIVITIES\".\"ACTIVITY_EN\"=<%=real_date%>)),1)) \n|| '-' || \nCASE WHEN LEN(MONTH(ADD_DAYS(MAX(PU_LAST(VBAP,\"_CEL_O2C_ACTIVITIES\".\"EVENTTIME\",\"_CEL_O2C_ACTIVITIES\".\"ACTIVITY_EN\"=<%=real_date%>)),1))||'')=1 THEN '0'||MONTH(ADD_DAYS(MAX(PU_LAST(VBAP,\"_CEL_O2C_ACTIVITIES\".\"EVENTTIME\",\"_CEL_O2C_ACTIVITIES\".\"ACTIVITY_EN\"=<%=real_date%>)),1))  \nELSE MONTH(ADD_DAYS(MAX(PU_LAST(VBAP,\"_CEL_O2C_ACTIVITIES\".\"EVENTTIME\",\"_CEL_O2C_ACTIVITIES\".\"ACTIVITY_EN\"=<%=real_date%>)),1))||'' END  \n|| '-' || \nCASE WHEN LEN(DAY(ADD_DAYS(MAX(PU_LAST(VBAP,\"_CEL_O2C_ACTIVITIES\".\"EVENTTIME\",\"_CEL_O2C_ACTIVITIES\".\"ACTIVITY_EN\"=<%=real_date%>)),1))||'')=1 THEN '0'||DAY(ADD_DAYS(MAX(PU_LAST(VBAP,\"_CEL_O2C_ACTIVITIES\".\"EVENTTIME\",\"_CEL_O2C_ACTIVITIES\".\"ACTIVITY_EN\"=<%=real_date%>)),1))  \nELSE DAY(ADD_DAYS(MAX(PU_LAST(VBAP,\"_CEL_O2C_ACTIVITIES\".\"EVENTTIME\",\"_CEL_O2C_ACTIVITIES\".\"ACTIVITY_EN\"=<%=real_date%>)),1))||'' END "
+  },
+  {
+    "description": "",
+    "id": "3581c34c-72f5-4717-a093-23ff1a6bb79d",
+    "name": "FP",
+    "parameterCount": 0,
+    "parameters": [],
+    "template": "SUM(CASE WHEN \"<%=evaluation_results_table%>\".\"<%=predictions_column%>\" > <%=threshold%>\n    AND KPI(\"Delay Indicator\") != 1 THEN 1.0 ELSE 0.0 END)"
+  },
+  {
+    "description": "",
+    "id": "a1106ad1-3ee8-457a-a675-18e7017d8407",
+    "name": "NETWR_CONVERTED",
+    "parameterCount": 0,
+    "parameters": [],
+    "template": "\"<%=case_table%>\".\"NETWR\""
+  },
+  {
+    "description": "",
+    "id": "890575ad-fd88-4971-93eb-c15a4d44b3be",
+    "name": "Accuracy",
+    "parameterCount": 0,
+    "parameters": [],
+    "template": "(KPI(\"TP\") + KPI(\"TN\")) / (KPI(\"TP\")+KPI(\"FN\")+KPI(\"TN\")+KPI(\"FP\"))"
+  },
+  {
+    "description": "",
+    "id": "dcbfdb47-ac95-4038-a757-34dd76e02e8d",
+    "name": "Recall",
+    "parameterCount": 0,
+    "parameters": [],
+    "template": "KPI(\"TP\") / (KPI(\"TP\") + KPI(\"FN\"))"
+  },
+  {
+    "description": "",
+    "id": "b91e1b91-304a-4f85-9573-fe3e5ba467a5",
+    "name": "TP",
+    "parameterCount": 0,
+    "parameters": [],
+    "template": "SUM(CASE WHEN  \"<%=evaluation_results_table%>\".\"<%=predictions_column%>\" > <%=threshold%>\n    AND KPI(\"Delay Indicator\") = 1 THEN 1.0 ELSE 0.0 END)"
+  },
+  {
+    "description": "",
+    "id": "26e9fe48-efc9-4fef-b887-9215175a9834",
+    "name": "FN",
+    "parameterCount": 0,
+    "parameters": [],
+    "template": "SUM(CASE WHEN  \"<%=evaluation_results_table%>\".\"<%=predictions_column%>\" <= <%=threshold%>\n    AND KPI(\"Delay Indicator\") = 1 THEN 1.0 ELSE 0.0 END)"
+  },
+  {
+    "description": "",
+    "id": "02a36ef2-8669-43bc-9d36-20e0d37b87f8",
+    "name": "Certainty",
+    "parameterCount": 0,
+    "parameters": [],
+    "template": "CASE WHEN <%=predictions_table%>.\"<%=predictions_column%>\" > <%=threshold%> AND <%=predictions_table%>.\"<%=predictions_column%>\"  > 0.8 THEN 'High' \nWHEN <%=predictions_table%>.\"<%=predictions_column%>\" < <%=threshold%> AND <%=predictions_table%>.\"<%=predictions_column%>\"  < 0.2  THEN 'High'\nWHEN <%=predictions_table%>.\"<%=predictions_column%>\" < <%=threshold%> AND <%=predictions_table%>.\"<%=predictions_column%>\"  < 0.4  THEN 'Medium'\nELSE 'Low'\nEND"
+  },
+  {
+    "description": "",
+    "id": "502e87e9-31b1-4ac0-80c4-1c9da966bb05",
+    "name": "Delay Indicator",
+    "parameterCount": 0,
+    "parameters": [],
+    "template": "\"<%=evaluation_results_table%>\".\"y_true\"\n"
+  },
+  {
+    "description": "",
+    "id": "14fadffa-4ece-49d4-9dfa-8fe108562431",
+    "name": "today_prod",
+    "parameterCount": 0,
+    "parameters": [],
+    "template": "\nYEAR(TODAY()) \n|| '-' || \nCASE WHEN LEN(MONTH(TODAY())||'')=1 THEN '0'||MONTH(TODAY())  \nELSE MONTH(TODAY())||'' END  \n|| '-' || \nCASE WHEN LEN(DAY(TODAY())||'')=1 THEN '0'||DAY(TODAY())  \nELSE DAY(TODAY())||'' END  "
+  },
+  {
+    "description": "",
+    "id": "6e8211f6-4804-46bc-9230-00712fd19ab7",
+    "name": "False Positive Rate",
+    "parameterCount": 0,
+    "parameters": [],
+    "template": "1 - (KPI(\"TN\")) / (KPI(\"TN\") + KPI(\"FP\"))"
+  },
+  {
+    "description": "",
+    "id": "6490f0f5-efc6-4bf9-b720-856cbae8dc75",
+    "name": "Prediction",
+    "parameterCount": 0,
+    "parameters": [],
+    "template": "CASE WHEN ISNULL(\"<%=predictions_table%>\".\"<%=predictions_column%>\")=1 THEN 'no prediction' WHEN  \"<%=predictions_table%>\".\"<%=predictions_column%>\" > <%=threshold%> THEN 'delayed' ELSE 'not_delayed' END"
+  },
+  {
+    "description": "",
+    "id": "5dc23cfa-4c88-4384-acf3-43ef98c180a1",
+    "name": "TN",
+    "parameterCount": 0,
+    "parameters": [],
+    "template": "SUM(CASE WHEN \"<%=evaluation_results_table%>\".\"<%=predictions_column%>\" <= <%=threshold%>\n    AND KPI(\"Delay Indicator\") != 1 THEN 1.0 ELSE 0.0 END)\n"
+  }
+]

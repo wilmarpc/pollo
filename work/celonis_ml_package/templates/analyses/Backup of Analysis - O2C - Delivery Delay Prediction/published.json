@@ -1,0 +1,167 @@
+{
+  "document": {
+    "KPILibrary": [],
+    "allowRawDataExport": true,
+    "colorMappings": [
+      {
+        "id": "de40a1f2-d131-438e-9656-145e8a6b0b49",
+        "name": "Prediction Color Mapping - Dimension",
+        "thresholds": [
+          {
+            "color": "#ec5759",
+            "compare": "==",
+            "formula": "delayed"
+          },
+          {
+            "color": "#68b900",
+            "compare": "==",
+            "formula": "not_delayed"
+          },
+          {
+            "color": "",
+            "compare": "==",
+            "formula": "no prediction"
+          }
+        ],
+        "type": "dimension"
+      },
+      {
+        "id": "7d3e727d-ce48-4c8c-902b-7224db63d062",
+        "name": "Detailed Color Mapping",
+        "thresholds": [
+          {
+            "color": "#68b900",
+            "compare": "==",
+            "formula": "not_delayed"
+          },
+          {
+            "color": "#ec5759",
+            "compare": "==",
+            "formula": "delayed"
+          },
+          {
+            "color": "#FFB710",
+            "compare": "==",
+            "formula": "too_early"
+          },
+          {
+            "color": "#cccccc",
+            "compare": "==",
+            "formula": "no due date"
+          },
+          {
+            "color": "#14A9D5",
+            "compare": "==",
+            "formula": "open"
+          }
+        ],
+        "type": "dimension"
+      },
+      {
+        "id": "d29c3dd6-45ae-4895-a2ce-796e56c140be",
+        "name": "Certainty Color Mapping",
+        "thresholds": [
+          {
+            "color": "#47d514",
+            "compare": "==",
+            "formula": "High"
+          },
+          {
+            "color": "#ec5759",
+            "compare": "==",
+            "formula": "Low"
+          },
+          {
+            "color": "#FFB710",
+            "compare": "==",
+            "formula": "Medium"
+          }
+        ],
+        "type": "series"
+      },
+      {
+        "id": "9a78b6bb-4915-4d37-aa51-bae15738b472",
+        "name": "Prediction Color Mapping",
+        "thresholds": [
+          {
+            "color": "#ec5759",
+            "compare": "==",
+            "formula": "delayed"
+          },
+          {
+            "color": "#32d514",
+            "compare": "==",
+            "formula": "not_delayed"
+          },
+          {
+            "color": "#9b9b9b",
+            "compare": "==",
+            "formula": "no prediction"
+          }
+        ],
+        "type": "series"
+      },
+      {
+        "id": "c318dd34-d0c0-41ca-a325-d5b2d76d6dc6",
+        "name": "Case State Mapping",
+        "thresholds": [
+          {
+            "color": "#cccccc",
+            "compare": "==",
+            "formula": "ignore"
+          },
+          {
+            "color": "#006687",
+            "compare": "==",
+            "formula": "predict"
+          },
+          {
+            "color": "#14A9D5",
+            "compare": "==",
+            "formula": "train"
+          }
+        ],
+        "type": "series"
+      },
+      {
+        "id": "edae5a0c-7b5f-4885-aef9-20497a1559bd",
+        "name": "Target Variable Mapping",
+        "thresholds": [
+          {
+            "color": "#68b900",
+            "compare": "==",
+            "formula": "0"
+          },
+          {
+            "color": "#ec5759",
+            "compare": "==",
+            "formula": "1"
+          },
+          {
+            "color": "#006687",
+            "compare": "==",
+            "formula": "2"
+          }
+        ],
+        "type": "series"
+      }
+    ],
+    "editMode": false,
+    "id": "43980edb-20c9-426e-a251-2b99be4e42ea",
+    "kpiViews": [],
+    "name": "O2C - Delivery Delay Prediction",
+    "palettes": [],
+    "rawDataExportLimit": 200,
+    "showFiltersForViewers": true,
+    "statelessLoadScript": "",
+    "theme": "celonis_legacy",
+    "translationMap": {}
+  },
+  "id": "7205be4f-8275-4b84-be33-6eeab794066c",
+  "lastChangeDate": 1568131298369,
+  "lastChangeUserId": "b772c437-ec61-43f4-9187-5dddaf8a3980",
+  "lastChangeUserName": "d.simancas@celonis.com(Daniela)",
+  "lockedUntilDate": 0,
+  "sourceId": null,
+  "title": null
+}

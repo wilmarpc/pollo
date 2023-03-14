@@ -1,0 +1,527 @@
+[
+  {
+    "linkedEntries": [
+      {
+        "available": true,
+        "selected": true,
+        "value": "split"
+      }
+    ],
+    "linkedFormula": "\"Py_DDP_Feature_importance\".\"metric\"",
+    "name": "feature_importance_metric",
+    "type": "text_replacement",
+    "value": "split"
+  },
+  {
+    "linkedEntries": null,
+    "name": "dimension_selector",
+    "type": "text_replacement",
+    "value": "<%=filter2%>"
+  },
+  {
+    "linkedEntries": null,
+    "name": "dimension_selector_text",
+    "type": "text_replacement",
+    "value": "Plant"
+  },
+  {
+    "linkedEntries": null,
+    "name": "main_color4",
+    "type": "text_replacement",
+    "value": "2C666E"
+  },
+  {
+    "linkedEntries": null,
+    "name": "main_color3",
+    "type": "text_replacement",
+    "value": "f81b67"
+  },
+  {
+    "linkedEntries": null,
+    "name": "main_color2",
+    "type": "text_replacement",
+    "value": "F0EDEE"
+  },
+  {
+    "linkedEntries": null,
+    "name": "main_color1",
+    "type": "text_replacement",
+    "value": "2e2e2e"
+  },
+  {
+    "linkedEntries": null,
+    "name": "CASE_STATE",
+    "type": "text_replacement",
+    "value": "CASE \n\nWHEN ISNULL(<%=due_date%>)=1 THEN 'ignore'\n\nWHEN ISNULL(PU_LAST(VBAP,_CEL_O2C_ACTIVITIES.EVENTTIME,_CEL_O2C_ACTIVITIES.ACTIVITY_EN = <%=real_date%>))=1 AND\n    HOURS_BETWEEN(<%=due_date%>,TO_TIMESTAMP('<%=today_help%>','YYYY-MM-DD')) >= (24.0 + 24.0* <%=buffer%>) THEN 'train'\n    \nWHEN ISNULL(PU_LAST(VBAP,_CEL_O2C_ACTIVITIES.EVENTTIME,_CEL_O2C_ACTIVITIES.ACTIVITY_EN = <%=real_date%>))=1 THEN 'predict'\n\nWHEN HOURS_BETWEEN(<%=due_date%>,PU_LAST(VBAP,_CEL_O2C_ACTIVITIES.EVENTTIME,_CEL_O2C_ACTIVITIES.ACTIVITY_EN = <%=real_date%>)) >= (24.0 + 24.0* <%=buffer%>) THEN 'train'\n\nWHEN HOURS_BETWEEN(<%=due_date%>,PU_LAST(VBAP,_CEL_O2C_ACTIVITIES.EVENTTIME,_CEL_O2C_ACTIVITIES.ACTIVITY_EN = <%=real_date%>)) < (24.0 + 24.0* <%=buffer%>) THEN 'train'\n\nELSE 'ignore' \n\nEND"
+  },
+  {
+    "linkedEntries": null,
+    "name": "filter6_text",
+    "type": "text_replacement",
+    "value": "#{\"VBAP\".\"MATNR\"}"
+  },
+  {
+    "linkedEntries": null,
+    "name": "filter6",
+    "type": "text_replacement",
+    "value": "\"VBAP\".\"MATNR\" || ' - ' || \"VBAP\".\"MATNR_TEXT\""
+  },
+  {
+    "linkedEntries": null,
+    "name": "TARGET_VARIABLE",
+    "type": "text_replacement",
+    "value": "CASE WHEN ISNULL(<%=due_date%>)=1 THEN NULL \n    \n         WHEN ISNULL(PU_LAST(VBAP,_CEL_O2C_ACTIVITIES.EVENTTIME,_CEL_O2C_ACTIVITIES.ACTIVITY_EN = <%=real_date%>))=1 AND\n              HOURS_BETWEEN(<%=due_date%>,TO_TIMESTAMP('<%=today_help%>','YYYY-MM-DD')) >= (24.0 + 24.0* <%=buffer%>) THEN 1\n              \n         WHEN ISNULL(PU_LAST(VBAP,_CEL_O2C_ACTIVITIES.EVENTTIME,_CEL_O2C_ACTIVITIES.ACTIVITY_EN = <%=real_date%>))=1 THEN NULL\n         \n         WHEN HOURS_BETWEEN(<%=due_date%>,PU_LAST(VBAP,_CEL_O2C_ACTIVITIES.EVENTTIME,_CEL_O2C_ACTIVITIES.ACTIVITY_EN = <%=real_date%>)) >= (24.0 + 24.0* <%=buffer%>) THEN 1\n         \n         WHEN HOURS_BETWEEN(<%=due_date%>,PU_LAST(VBAP,_CEL_O2C_ACTIVITIES.EVENTTIME,_CEL_O2C_ACTIVITIES.ACTIVITY_EN = <%=real_date%>)) < (24.0 + 24.0* <%=buffer%>) THEN 0\n         \n         ELSE NULL END"
+  },
+  {
+    "linkedEntries": [
+      {
+        "available": true,
+        "selected": true,
+        "value": 7
+      }
+    ],
+    "linkedFormula": "\"<%= predictions_table %>\".\"wildcard\"",
+    "name": "reaction_time_eval",
+    "type": "text_replacement",
+    "value": "7"
+  },
+  {
+    "linkedEntries": [],
+    "linkedFormula": "\"VBAP\".\"WERKS_TEXT\"",
+    "name": "included_plants",
+    "type": "text_replacement",
+    "value": ""
+  },
+  {
+    "linkedEntries": null,
+    "name": "test_performance_table",
+    "type": "text_replacement",
+    "value": "Py_DDP_Test_performance"
+  },
+  {
+    "linkedEntries": null,
+    "name": "reaction_time_col",
+    "type": "text_replacement",
+    "value": "wildcard"
+  },
+  {
+    "linkedEntries": null,
+    "name": "predictions_table",
+    "type": "text_replacement",
+    "value": "Py_DDP_Predictions"
+  },
+  {
+    "linkedEntries": [],
+    "name": "predictions_column",
+    "type": "text_replacement",
+    "value": "y_pred"
+  },
+  {
+    "linkedEntries": null,
+    "name": "evaluation_results_table",
+    "type": "text_replacement",
+    "value": "Py_DDP_Evaluation_results"
+  },
+  {
+    "linkedEntries": null,
+    "name": "demo_dummy",
+    "type": "text_replacement",
+    "value": "demo"
+  },
+  {
+    "linkedEntries": [
+      {
+        "available": true,
+        "selected": true,
+        "value": "VBAP.ERNAM"
+      },
+      {
+        "available": true,
+        "selected": true,
+        "value": "VBAP.PCTRF"
+      },
+      {
+        "available": true,
+        "selected": true,
+        "value": "VBAP.PRCTR"
+      },
+      {
+        "available": true,
+        "selected": true,
+        "value": "VBAP.ROUTE"
+      }
+    ],
+    "linkedFormula": "\"Py_DDP_Feature_recommendation\".\"table\" || '.' || \"Py_DDP_Feature_recommendation\".\"column\"",
+    "name": "case_features",
+    "type": "text_replacement",
+    "value": "'VBAP.ERNAM','VBAP.PCTRF','VBAP.PRCTR','VBAP.ROUTE'"
+  },
+  {
+    "linkedEntries": [
+      {
+        "available": true,
+        "selected": true,
+        "value": "2009-05-01"
+      }
+    ],
+    "linkedFormula": "YEAR(\"_CEL_O2C_ACTIVITIES\".\"EVENTTIME\")\n|| '-' ||\nCASE WHEN LEN(MONTH(\"_CEL_O2C_ACTIVITIES\".\"EVENTTIME\")||'')=1 THEN '0'||MONTH(\"_CEL_O2C_ACTIVITIES\".\"EVENTTIME\") ELSE MONTH(\"_CEL_O2C_ACTIVITIES\".\"EVENTTIME\")||'' END \n|| '-01'",
+    "name": "data_ext_start_date",
+    "type": "text_replacement",
+    "value": "2009-05-01"
+  },
+  {
+    "linkedEntries": [
+      {
+        "available": true,
+        "selected": true,
+        "value": 3
+      },
+      {
+        "available": true,
+        "selected": true,
+        "value": 7
+      },
+      {
+        "available": true,
+        "selected": true,
+        "value": 10
+      }
+    ],
+    "linkedFormula": "    CASE WHEN ISNULL(<%=due_date%>)=1 THEN NULL \n    \n         WHEN ISNULL(PU_LAST(VBAP,_CEL_O2C_ACTIVITIES.EVENTTIME,_CEL_O2C_ACTIVITIES.ACTIVITY_EN = <%=real_date%>))=1 AND\n              HOURS_BETWEEN(<%=due_date%>,TO_TIMESTAMP('<%=today_help%>','YYYY-MM-DD')) >= (24.0 + 24.0* <%=buffer%>) THEN NULL\n              \n         WHEN ISNULL(PU_LAST(VBAP,_CEL_O2C_ACTIVITIES.EVENTTIME,_CEL_O2C_ACTIVITIES.ACTIVITY_EN = <%=real_date%>))=1 THEN ROUND(DAYS_BETWEEN(TO_TIMESTAMP('<%=today_help%>','YYYY-MM-DD'),<%=due_date%>))\n         \n        ELSE NULL END",
+    "name": "reaction_time",
+    "type": "text_replacement",
+    "value": "3,7,10"
+  },
+  {
+    "$formulaValue": 875667,
+    "linkedEntries": null,
+    "name": "total",
+    "type": "static_value",
+    "value": "COUNT( DISTINCT \"_CEL_O2C_ACTIVITIES\".\"_CASE_KEY\")"
+  },
+  {
+    "linkedEntries": [],
+    "name": "case_feature",
+    "type": "text_replacement",
+    "value": "KNA1.REGIO"
+  },
+  {
+    "linkedEntries": [
+      {
+        "available": true,
+        "selected": true,
+        "value": "Approve Credit Check"
+      }
+    ],
+    "linkedFormula": "\"_CEL_O2C_ACTIVITIES\".\"ACTIVITY_EN\"",
+    "name": "time_to_activity",
+    "type": "text_replacement",
+    "value": "'Approve Credit Check'"
+  },
+  {
+    "linkedEntries": [
+      {
+        "available": true,
+        "selected": true,
+        "value": 3
+      }
+    ],
+    "linkedFormula": "\"Feature_Importance\".\"model\"",
+    "name": "forecast_horizon",
+    "type": "text_replacement",
+    "value": "3"
+  },
+  {
+    "linkedEntries": null,
+    "name": "confirm_date",
+    "type": "text_replacement",
+    "value": "PU_FIRST(VBAP,_CEL_O2C_ACTIVITIES.EVENTTIME,_CEL_O2C_ACTIVITIES.ACTIVITY_EN = 'Confirm Delivery Date')"
+  },
+  {
+    "linkedEntries": null,
+    "name": "dropDownTime3",
+    "type": "text_replacement",
+    "value": "'Calendar Week'"
+  },
+  {
+    "linkedEntries": null,
+    "name": "dropDownTime2",
+    "type": "text_replacement",
+    "value": "'Month'"
+  },
+  {
+    "linkedEntries": null,
+    "name": "dropDownTime1",
+    "type": "text_replacement",
+    "value": "'Month'"
+  },
+  {
+    "linkedEntries": [
+      {
+        "available": true,
+        "selected": true,
+        "value": "lgbm_classifier"
+      }
+    ],
+    "linkedFormula": "\"<%= predictions_table %>\".\"model_name\"",
+    "name": "model",
+    "type": "text_replacement",
+    "value": "lgbm_classifier"
+  },
+  {
+    "linkedEntries": null,
+    "name": "case_table",
+    "type": "text_replacement",
+    "value": "VBAP"
+  },
+  {
+    "linkedEntries": [
+      {
+        "available": true,
+        "selected": true,
+        "value": "Due Date passed"
+      }
+    ],
+    "linkedFormula": "\"_CEL_AR_ACTIVITIES\".\"ACTIVITY_<%=language%>\" ",
+    "name": "due_date_text",
+    "type": "text_replacement",
+    "value": "'Due Date passed'"
+  },
+  {
+    "linkedEntries": null,
+    "name": "pov_end",
+    "type": "text_replacement",
+    "value": "TO_TIMESTAMP('2018-11-30','YYYY-MM-DD')"
+  },
+  {
+    "linkedEntries": null,
+    "name": "pov_start",
+    "type": "text_replacement",
+    "value": "TO_TIMESTAMP('2018-11-01','YYYY-MM-DD')"
+  },
+  {
+    "linkedEntries": null,
+    "name": "threshold",
+    "type": "text_replacement",
+    "value": "0.5"
+  },
+  {
+    "linkedEntries": [
+      {
+        "available": true,
+        "selected": true,
+        "value": "VBAP.PRCTR"
+      }
+    ],
+    "linkedFormula": "\"Py_DDP_Feature_recommendation\".\"table\" || '.'||\"Py_DDP_Feature_recommendation\".\"column\"",
+    "name": "feature",
+    "type": "text_replacement",
+    "value": "VBAP.PRCTR"
+  },
+  {
+    "linkedEntries": [],
+    "linkedFormula": "ROUND_DAY(\"_CEL_O2C_ACTIVITIES\".\"EVENTTIME\")",
+    "name": "training_start_date",
+    "type": "text_replacement",
+    "value": null
+  },
+  {
+    "linkedEntries": null,
+    "name": "creation_date",
+    "type": "text_replacement",
+    "value": "PU_FIRST(VBAP,_CEL_O2C_ACTIVITIES.EVENTTIME,_CEL_O2C_ACTIVITIES.ACTIVITY_EN = 'Create Sales Order Item')"
+  },
+  {
+    "$formulaValue": "2009-12-30",
+    "linkedEntries": null,
+    "name": "today_help",
+    "type": "static_value",
+    "value": "KPI(\"today_help\")"
+  },
+  {
+    "linkedEntries": [
+      {
+        "available": true,
+        "selected": true,
+        "value": "Record Goods Issue"
+      }
+    ],
+    "linkedFormula": "\"_CEL_O2C_ACTIVITIES\".\"ACTIVITY_EN\"",
+    "name": "real_date",
+    "type": "text_replacement",
+    "value": "'Record Goods Issue'"
+  },
+  {
+    "linkedEntries": [],
+    "name": "due_date",
+    "type": "text_replacement",
+    "value": "PU_FIRST(\"VBAP\",VBEP.TS_EDATU,VBEP.ETENR='0001')"
+  },
+  {
+    "linkedEntries": null,
+    "name": "invoicedrilldown",
+    "type": "text_replacement",
+    "value": ""
+  },
+  {
+    "linkedEntries": null,
+    "name": "drilldown1_text",
+    "type": "text_replacement",
+    "value": "#{\"VBAK\".\"KUNNR\"}"
+  },
+  {
+    "linkedEntries": null,
+    "name": "drilldown1",
+    "type": "text_replacement",
+    "value": "\"VBAK\".\"KUNNR\" || ' - ' || \"KNA1\".\"NAME1\""
+  },
+  {
+    "linkedEntries": null,
+    "name": "drilldown_text",
+    "type": "text_replacement",
+    "value": "#{\"VBAK\".\"KUNNR\"}"
+  },
+  {
+    "linkedEntries": null,
+    "name": "drilldown",
+    "type": "text_replacement",
+    "value": "\"VBAP\".\"VKORG\" || \" - \" || \"VBAP\".\"VKORG_TEXT \""
+  },
+  {
+    "linkedEntries": [],
+    "name": "buffer_early",
+    "type": "text_replacement",
+    "value": "7"
+  },
+  {
+    "linkedEntries": null,
+    "name": "date",
+    "type": "text_replacement",
+    "value": "'2011-03-31'"
+  },
+  {
+    "linkedEntries": [
+      {
+        "available": true,
+        "id": 12,
+        "selected": true,
+        "value": "Invoice cleared"
+      }
+    ],
+    "linkedFormula": "\"_CEL_AR_ACTIVITIES\".\"ACTIVITY_<%=language%>\" ",
+    "name": "payment_date",
+    "type": "text_replacement",
+    "value": "'Invoice cleared'"
+  },
+  {
+    "linkedEntries": [
+      {
+        "available": true,
+        "id": 10,
+        "selected": true,
+        "value": "Due Date passed"
+      }
+    ],
+    "linkedFormula": "\"_CEL_AR_ACTIVITIES\".\"ACTIVITY_<%=language%>\" ",
+    "name": "due_date_old",
+    "type": "text_replacement",
+    "value": "'Due Date passed'"
+  },
+  {
+    "linkedEntries": null,
+    "name": "language",
+    "type": "text_replacement",
+    "value": "EN"
+  },
+  {
+    "linkedEntries": [
+      {
+        "available": true,
+        "selected": true,
+        "value": 1
+      }
+    ],
+    "linkedFormula": "DAY(\"_CEL_O2C_ACTIVITIES\".\"EVENTTIME\")-1",
+    "name": "buffer",
+    "type": "text_replacement",
+    "value": "1"
+  },
+  {
+    "linkedEntries": null,
+    "name": "currency_symbol",
+    "type": "text_replacement",
+    "value": "\u20ac"
+  },
+  {
+    "linkedEntries": null,
+    "name": "filter10_text",
+    "type": "text_replacement",
+    "value": "InternalOrExternal"
+  },
+  {
+    "linkedEntries": null,
+    "name": "filter10",
+    "type": "text_replacement",
+    "value": "CASE WHEN ISNULL(KNA1.VBUND)=1 THEN 'External' ELSE 'Internal' END"
+  },
+  {
+    "linkedEntries": null,
+    "name": "filter5_text",
+    "type": "text_replacement",
+    "value": "#{\"VBAK\".\"AUART\"}"
+  },
+  {
+    "linkedEntries": null,
+    "name": "filter5",
+    "type": "text_replacement",
+    "value": "\"VBAK\".\"AUART\" || ' - ' || \"VBAK\".\"AUART_TEXT\""
+  },
+  {
+    "linkedEntries": null,
+    "name": "filter4_text",
+    "type": "text_replacement",
+    "value": "#{\"VBAK\".\"VTWEG\"}"
+  },
+  {
+    "linkedEntries": null,
+    "name": "filter4",
+    "type": "text_replacement",
+    "value": "\"VBAK\".\"VTWEG\" || ' - ' || \"VBAK\".\"VTWEG_TEXT\""
+  },
+  {
+    "linkedEntries": null,
+    "name": "filter3_text",
+    "type": "text_replacement",
+    "value": "#{\"VBAK\".\"VKORG\"}"
+  },
+  {
+    "linkedEntries": null,
+    "name": "filter3",
+    "type": "text_replacement",
+    "value": "\"VBAK\".\"VKORG\" || ' - ' || \"VBAK\".\"VKORG_TEXT\""
+  },
+  {
+    "linkedEntries": null,
+    "name": "filter2_text",
+    "type": "text_replacement",
+    "value": "#{\"VBAP\".\"WERKS\"}"
+  },
+  {
+    "linkedEntries": null,
+    "name": "filter2",
+    "type": "text_replacement",
+    "value": "\"VBAP\".\"WERKS\" || ' - ' || \"VBAP\".\"WERKS_TEXT\""
+  },
+  {
+    "linkedEntries": null,
+    "name": "filter1_text",
+    "type": "text_replacement",
+    "value": "#{\"VBAK\".\"BUKRS_VF\"}"
+  },
+  {
+    "linkedEntries": null,
+    "name": "filter1",
+    "type": "text_replacement",
+    "value": "\"VBAK\".\"BUKRS_VF\" || '-' || \"VBAK\".\"BUKRS_TEXT\""
+  }
+]
